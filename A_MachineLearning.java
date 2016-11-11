@@ -543,6 +543,50 @@ private JTextArea textArea;
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "csv", "text");
         chooser.setFileFilter(filter);
         chooser.setMultiSelectionEnabled(true);
+        int result = chooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = chooser.getSelectedFile();
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            this.file2 = chooser.getSelectedFile().getAbsolutePath();
+            try {
+                CSVLoader loader = new CSVLoader();
+                loader.setSource(new File(this.file2));
+                Instances data = loader.getDataSet();
+                System.out.println(data);
+
+                // save ARFF
+                this.file2 = this.file2.replaceFirst("[.][^.]+$", "");
+                String arffile = this.file2 + ".arff";
+                System.out.println(arffile);
+                ArffSaver saver = new ArffSaver();
+                saver.setInstances(data);
+                saver.setFile(new File(arffile));
+                saver.writeBatch();
+            } catch (IOException ex) {
+                Logger.getLogger(MachinLearningInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(this.file2);
+            //txtdata2.setText(this.file2);
+
+        }
+        txtarea.setText("Succesfully converted " + this.file2);
+        try {
+            FileReader reader = new FileReader(this.file2 + ".arff");
+            BufferedReader br = new BufferedReader(reader);
+            txtarea2.read(br, null);
+            br.close();
+            txtarea2.requestFocus();
+
+        } catch (Exception e2) {
+            System.out.println(e2);
+        }
+        txtdata.setText(chooser.getSelectedFile().getName());
+        txtarea.setText("You have choose to load the file: " + chooser.getSelectedFile().getName());
+ /**       
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "csv", "text");
+        chooser.setFileFilter(filter);
+        chooser.setMultiSelectionEnabled(true);
         //chooser.setMultiSelectionEnable(true);
         int result = chooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -580,8 +624,9 @@ private JTextArea textArea;
         } catch (Exception e2) {
             System.out.println(e2);
         }
+        txtdata.setText(chooser.getSelectedFile().getName());
         txtarea.setText("You have choose to load the file: " + chooser.getSelectedFile().getName());
-
+**/
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtdataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdataActionPerformed

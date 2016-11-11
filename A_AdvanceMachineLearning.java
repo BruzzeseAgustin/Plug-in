@@ -858,7 +858,6 @@ public class A_AdvanceMachineLearning extends javax.swing.JInternalFrame {
         } catch (Exception e2) {
             System.out.println(e2);
         }
-
         txtdata.setText(chooser.getSelectedFile().getName());
         txtarea.setText("You have choose to load the file: " + chooser.getSelectedFile().getName());
     }//GEN-LAST:event_jButton3ActionPerformed

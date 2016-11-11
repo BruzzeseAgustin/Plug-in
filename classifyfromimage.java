@@ -163,7 +163,7 @@ txtarea2.setVisible(false);
 
         interval3.setEditable(false);
         interval3.setForeground(new java.awt.Color(153, 153, 153));
-        interval3.setText("You have not set a lower limit");
+        interval3.setText("You have not set a Lower limit");
         interval3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 interval3ActionPerformed(evt);
